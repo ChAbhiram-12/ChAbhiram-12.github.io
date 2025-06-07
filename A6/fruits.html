@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Fruit List</title>
+</head>
+<body>
+
+  <h2>Fruit List</h2>
+
+  <input id="fruitInput" type="text" placeholder="Enter fruit name">
+  <button onclick="addFruit()">Add</button>
+
+  <p>Fruits:</p>
+  <ul id="fruitList"></ul>
+
+  <script>
+    
+    let fruits = [];
+  
+    function addFruit() {
+      
+      let fruit = document.getElementById("fruitInput").value;
+     
+      if (fruit !== "") {
+        fruits.push(fruit); 
+
+        let list = document.getElementById("fruitList");
+        list.innerHTML += "<li>" + fruit + "</li>";
+
+        document.getElementById("fruitInput").value = " "
+      }
+    }
+  </script>
+
+</body>
+</html>
