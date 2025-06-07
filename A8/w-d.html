@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Simple Bank Page</title>
+  <style>
+    body {
+      font-family: Arial;
+      padding: 20px;
+    }
+    .hidden {
+      display: none;
+    }
+    input {
+      padding: 8px;
+      margin: 5px;
+    }
+    button {
+      padding: 8px 12px;
+      margin: 5px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Login Section -->
+  <div id="loginSection">
+    <h2>Login</h2>
+    <input type="text" id="username" placeholder="Enter your name">
+    <button onclick="login()">Login</button>
+  </div>
+
+  <!-- Banking Section -->
+  <div id="bankSection" class="hidden">
+    <h2>Welcome, <span id="userDisplay"></span></h2>
+
+    <input type="number" id="amount" placeholder="Enter amount">
+
+    <button onclick="deposit()">Deposit</button>
+    <button onclick="withdraw()">Withdraw</button>
+
+    <h3>Current Balance: ₹<span id="balance">0</span></h3>
+  </div>
+
+  <script>
+    let balance = 0;
+
+    function login() {
+      const name = document.getElementById("username").value;
+      if (name !== "") {
+        document.getElementById("loginSection").classList.add("hidden");
+        document.getElementById("bankSection").classList.remove("hidden");
+        document.getElementById("userDisplay").textContent = name;
+      }
+    }
+
+    function deposit() {
+      const amt = parseInt(document.getElementById("amount").value);
+      if (!isNaN(amt) && amt > 0) {
+        balance += amt;
+        updateBalance();
+      }
+    }
+
+    function withdraw() {
+      const amt = parseInt(document.getElementById("amount").value);
+      if (!isNaN(amt) && amt > 0 && amt <= balance) {
+        balance -= amt;
+        updateBalance();
+      } else if (amt > balance) {
+        alert("Not enough balance!");
+      }
+    }
+
+    function updateBalance() {
+      document.getElementById("balance").textContent = balance;
+      document.getElementById("amount").value = "";
+    }
+  </script>
+
+</body>
+</html>
